@@ -1,12 +1,14 @@
 import './App.css';
 import { Chart } from './components/Chart';
+import { Editor } from './components/Editor';
 
 function App() {
 
   return (
-    <div>
+    <>
+      <Editor />
       <Chart />
-    </div>
+    </>
   );
 }
 
