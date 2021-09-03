@@ -5,6 +5,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
 import { Controlled as ControlledEditor, IControlledCodeMirror} from 'react-codemirror2';
 import { useState } from 'react';
+import stringToJsonFormat from '../../utils/stringToJsonFormat';
 
 // type EditorProps = {
 //   value: string,
@@ -18,15 +19,23 @@ type handleChangeProps = {
 
 export function Editor(): JSX.Element {
   const [inputData, setInputData] = useState('');
+  const [inputDataToJson, setInputDataToJson] = useState({});
 
-  function handleChange: (editor, data, value):IControlledCodeMirror['onBeforeChange'] {
+  function handleChange (editor:any, data:any, value:any) {
     setInputData(value);
     console.log(inputData);
   }
 
+  function handleChart () {
+    
+    let data = stringToJsonFormat(inputData);
+    
+    console.log(data.timestamp);
+  }
+
   return (
     <div className={styles.editorContainer}>
-        <ControlledEditor 
+        {/* <ControlledEditor 
           onBeforeChange={handleChange}
           value=''
           className={styles.codeMirrorWrapper}
@@ -37,7 +46,10 @@ export function Editor(): JSX.Element {
             theme: 'material',
             lineNumbers: true
           }}
-        />
+        /> */}
+        <textarea name="teste-textArea" value={inputData} onChange={e => setInputData(e.target.value)}></textarea>
+        <button onClick={() => handleChart()}>Gerar Dados</button>
+        <h1>{inputData}</h1>
     </div>
   )
 }
