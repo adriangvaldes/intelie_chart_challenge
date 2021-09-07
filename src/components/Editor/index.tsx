@@ -13,7 +13,6 @@ import stringToJsonFormat from '../../utils/stringToJsonFormat';
 // };
 
 type handleChangeProps = {
-  
   value: string,
 };
 
@@ -28,9 +27,11 @@ export function Editor(): JSX.Element {
 
   function handleChart () {
     
-    let data = stringToJsonFormat(inputData);
+    let datas = stringToJsonFormat(inputData);
     
-    console.log(data.timestamp);
+    datas.map(data => {
+      console.log(data.timestamp);
+    })
   }
 
   return (
