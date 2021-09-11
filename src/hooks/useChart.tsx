@@ -14,7 +14,7 @@ interface EventData {
   end?: number;
 }
 
-interface EventDataReal {
+export interface EventDataReal {
   type: string;
   timestamp: number;
   os: string;
@@ -23,20 +23,20 @@ interface EventDataReal {
   max_response_time: number;
 }
 
-interface EventStart {
+export interface EventStart {
   type: string;
   timestamp: number;
   select: string[];
   group: string[];
 }
 
-interface EventSpan {
+export interface EventSpan {
   type: string;
   begin: number; 
   end: number;
 }
 
-interface EventStop {
+export interface EventStop {
   type: string;
   timestamp: number;
 }
@@ -50,7 +50,8 @@ interface ChartContextData {
   startEvent: EventStart;
   stopEvent: EventStop;
   spanEvent: EventSpan;
-  data: EventData[]
+  dataEvent: EventDataReal[];
+  data: EventDataReal[];
 }
 
 interface DataProviderProps {
@@ -62,16 +63,17 @@ export const ChartContext = createContext({} as ChartContextData);
 export function ChartProvider({ children }: DataProviderProps) {
   const [inputData, setInputData] = useState('');
   const [chartData, setChartData] = useState([] as EventData[]);
+  const [data, setData] = useState<EventDataReal[]>([]);
 
-  let startEvent = {}
-  let stopEvent = {}
-  let spanEvent = {}
-  const data = [];
+  let startEvent = {} as EventStart;
+  let stopEvent = {} as EventStop;
+  let spanEvent = {} as EventSpan;
+  let dataEvent = [] as EventDataReal[];
+  
  
   function setChartRange() {
     let startTime = 0;
     let endTime = 0;
-    let visibleDateRange = 0;
 
     for (const chart of chartData) {
       if (chart.type === 'start') {
@@ -87,6 +89,9 @@ export function ChartProvider({ children }: DataProviderProps) {
 
   function handleSubmit() {
     const datas = stringToJsonFormat(inputData);
+
+    let dataEvent = [] as EventDataReal[];
+
     for (const chart of datas) {
       if (chart.type === 'start') {
         startEvent = chart
@@ -98,18 +103,32 @@ export function ChartProvider({ children }: DataProviderProps) {
         spanEvent = chart
       }
       if (chart.type === 'data'){
-        data.push(chart)
+        dataEvent = ([...dataEvent, chart])
+        console.log(dataEvent);
       }
     }
+    setData(dataEvent);
     setChartData(datas);
   }
 
-  async function storeDataInput(typedData: string) {
-    await setInputData(typedData);
+  function storeDataInput(typedData: string) {
+    setInputData(typedData);
   }
 
   return (
-    <ChartContext.Provider value={{ handleSubmit, storeDataInput, inputData, chartData, setChartRange, startEvent, stopEvent }}>
+    <ChartContext.Provider 
+      value={{ 
+        handleSubmit, 
+        storeDataInput, 
+        inputData, 
+        chartData, 
+        setChartRange, 
+        startEvent, 
+        stopEvent, 
+        spanEvent, 
+        dataEvent,
+        data 
+      }}>
       {children}
     </ChartContext.Provider>
   );

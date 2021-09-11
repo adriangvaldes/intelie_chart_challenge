@@ -7,9 +7,8 @@ import { useChart } from '../../hooks/useChart';
 
 
 export function Editor(): JSX.Element {
-  const { storeDataInput, inputData, chartData, setChartRange } = useChart();
+  const { storeDataInput, inputData } = useChart();
 
-  const chartEndRange = setChartRange();
 
   return (
     <div className={styles.editorContainer}>
