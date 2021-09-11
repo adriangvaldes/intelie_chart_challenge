@@ -5,9 +5,11 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
 import { useChart } from '../../hooks/useChart';
 
-export function Editor(): JSX.Element {
-  const { storeDataInput, inputData } = useChart();
 
+export function Editor(): JSX.Element {
+  const { storeDataInput, inputData, chartData, setChartRange } = useChart();
+
+  const chartEndRange = setChartRange();
 
   return (
     <div className={styles.editorContainer}>

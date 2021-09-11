@@ -1,6 +1,5 @@
 export default function stringToJsonFormat(inputString: string) {
   const datas = inputString.split(/\r?\n/);
-
   const dataFormatted = datas.map(data => {
     const dataAux = data.replace('{type:', '{"type":')
       .replace('timestamp:', '"timestamp":')
@@ -20,6 +19,8 @@ export default function stringToJsonFormat(inputString: string) {
 
     return dataJson;
   });
+
+  
 
   return dataFormatted;
 }
