@@ -2,7 +2,7 @@ import { Line } from 'react-chartjs-2'
 import styles from './styles.module.scss';
 
 export function Chart(): JSX.Element {
-
+  
   return (
     <div className={styles.chartContainer}>
       <Line

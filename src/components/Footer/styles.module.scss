@@ -1,0 +1,31 @@
+.container {
+  position: fixed;
+  height: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+
+  height: 5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 2rem;
+
+  background: #dddee1;
+
+  button {
+    font-family: Roboto;
+    padding: 10px;
+    height: 2.5rem;
+    font-size: 0.75rem;
+    border: none;
+    background: #017eff;
+    color: #f4f9ff;
+    border-radius: 4px;
+
+    &:hover{
+      background: #3e9fff;
+    }
+  }
+}
