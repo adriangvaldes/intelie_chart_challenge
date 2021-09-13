@@ -104,7 +104,6 @@ export function ChartProvider({ children }: DataProviderProps) {
       }
       if (chart.type === 'data'){
         dataEvent = ([...dataEvent, chart])
-        console.log(dataEvent);
       }
     }
     setData(dataEvent);

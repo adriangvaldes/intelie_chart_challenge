@@ -5,8 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { ChartProvider } from './hooks/useChart';
 
-function App() {
-
+export default function App() {
   return (
     <ChartProvider>
       <Header />
@@ -17,4 +16,3 @@ function App() {
   );
 }
 
-export default App;
